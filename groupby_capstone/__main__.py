@@ -45,11 +45,11 @@ def main(cmd_args, *args, **kwargs):
     else:
         setup_logger()
 
-    sdc_command = "pass"
+    command = "webserver"
     if cmd_args:
-        sdc_command = cmd_args[0]
+        command = cmd_args[0]
 
-    run(sdc_command)
+    run(command)
 
 
 if __name__ == "__main__":
