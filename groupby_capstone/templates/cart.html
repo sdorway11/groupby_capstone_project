@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block page_content %}
+
+  {% for product in products %}
+      <div id="selection">
+        <form method="POST" action="{{ url_for('remove_product') }}">
+          <label>{{ product["product_id"] }}</label>
+          <button type="submit" name="product_id" value="{{ product["product_id"] }}">Remove from Cart</button>
+        </form>
+        <form method="POST" action="{{ url_for('view_product') }}">
+          <button type="submit" name="product_id" value="{{ product["product_id"] }}">View Product</button>
+        </form>
+      </div>
+  {% endfor %}
+
+{% endblock %}

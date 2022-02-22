@@ -8,8 +8,8 @@ here is a good site for installing pyenv and pyenv-virtualenv https://akrabat.co
 after that is installed following those instructuctions run this in the directory of this project
 
 ```shell
-pyenv install 3.9.9
-pyenv virtualenv 3.9.9 groupby_capstone
+pyenv install 3.7.12
+pyenv virtualenv 3.7.12 groupby_capstone
 pyenv local groupby_capstone
 python -m pip install poetry
 python -m poetry install

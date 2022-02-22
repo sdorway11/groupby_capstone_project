@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: groupby-webserver
+  namespace: groupby
+  labels:
+    app: groupby-webserver
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: groupby-webserver
+  template:
+    metadata:
+      labels:
+        app: groupby-webserver
+    spec:
+      serviceAccountName: groupby
+      containers:
+        - name: groupby-webserver
+          image: sdorway11/groupby_capstone:latest
+          imagePullPolicy: Always
+          env:
+            - name: FLASK_HOST_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+            - name: FLASK_PORT
+              value: "80"
+            - name: APP_ENV
+              value: "PROD"
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 750m
+              memory: 3Gi
+            requests:
+              cpu: 500m
+              memory: 2Gi

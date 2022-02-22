@@ -3,18 +3,48 @@
 {% block content %}
 
 <h2>Groupby Capstone Project</h2>
+{#{% for field in form %}#}
+{#    <tr>#}
+{#        <th>{{ field.label }}</th>#}
+{#        <td>{{ field }}</td>#}
+{#    </tr>#}
+{#{% endfor %}#}
 
-<!--<p>Click any president's name.</p>-->
 
-<!--&lt;!&ndash; pairs is a list that must be sent here by a route function-->
+<div id="session">
+<h3>Session ID: </h3>
+<p>{{ user_session }}</p>
+<h3>Conversion Likelihood:</h3>
+<p>{{ conversion_percentage }}%</p>
+</div>
+  {% block page_content %}
+  <div id="selection">
+    <form method="POST" action="{{ url_for('view_product') }}">
+      <label>Products</label>
+        <select name="product_id">
+          {% for product_id in product_ids %}
+                <option value="{{ product_id }}">{{ product_id }}</option>
+          {% endfor %}
+        </select>
+      <input type="submit" value="View" />
+    </form>
+  </div>
+  <div id="selection">
+    <form method="POST" action="{{ url_for('view_product') }}">
+      <label>Top Products</label>
+        <select name="product_id">
+          {% for product_id in top_products %}
+                <option value="{{ product_id }}">{{ product_id }}</option>
+          {% endfor %}
+        </select>
+      <input type="submit" value="View" />
+    </form>
+  </div>
+  {% endblock %}
 
-<!--     The list will contain 45 pairs: a presidency number, and a-->
-<!--     president's name &ndash;&gt;-->
-
-<!--    <ul>-->
-<!--    {% for pair in pairs %}-->
-<!--        <li><a href="{{ url_for( 'detail', num=pair[0] ) }}">{{ pair[1] }}</a></li>-->
-<!--    {% endfor %}-->
-<!--    </ul>-->
-
+    <div id="selection">
+        <form action="{{ url_for('index') }}">
+          <button type="submit" name="home" value="Home">Home</button>
+        </form>
+    </div>
 <!--{% endblock %}-->

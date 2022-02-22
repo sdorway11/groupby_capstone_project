@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+
+{% block page_content %}
+
+  <div id="selection">
+    <form method="POST" action="{{ url_for('cart_product') }}">
+      <label>Wow what a lovely product: {{ product_id }}</label>
+      <button type="submit" name="product_id" value="{{ product_id }}">Add to Cart</button>
+    </form>
+  </div>
+
+    <h3>Recommended Products</h3>
+  {% for product_rec in product_recs %}
+      <div id="selection">
+        <form method="POST" action="{{ url_for('view_product') }}">
+          <label>{{ product_rec }}</label>
+          <button type="submit" name="product_id" value="{{ product_rec }}">View Product</button>
+        </form>
+      </div>
+  {% endfor %}
+
+{% endblock %}
