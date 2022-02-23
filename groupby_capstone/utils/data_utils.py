@@ -280,6 +280,7 @@ def top_k_carted_products(df, k):
 
 def get_products():
     products = load_pickled_object(f"{DATA_PATH}/product_data.pkl")
+    products.reset_index(inplace=True)
 
     return products
 
@@ -305,6 +306,13 @@ def get_users():
     return users
 
 
+def create_users_file():
+    sample = load_pickled_object(f"{DATA_PATH}/ten_percent_sample.pkl")
+    users_data = sample.user_id.unique()
+    users = pandas.DataFrame(data=users_data, columns=["user_id"])
+    users.to_parquet(f"{DATA_PATH}/users.parquet")
+
+
 def get_random(df):
     random_value = random.choice(df)
 
@@ -316,6 +324,14 @@ def get_product_recommendations():
 
     return product_recommendations
 
+
+def create_recommendations_file():
+    data_dir = Path(f'{DATA_PATH}/product_recs.parquet')
+    full_df = pandas.concat(
+        pandas.read_parquet(parquet_file)
+        for parquet_file in data_dir.glob('*.parquet')
+    )
+    full_df.to_parquet(f"{DATA_PATH}/product_recommendations.parquet")
 
 # tests
 def test_make_ordinal():

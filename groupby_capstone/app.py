@@ -48,7 +48,6 @@ def update_session_events(event: SessionEvent):
 
         session["carted"] = updated_carted
 
-
     session["conversion_percentage"] = round(predict(session) * 100, 2)
 
 
@@ -59,7 +58,6 @@ def index():
         session["user_session"] = str(uuid.uuid4())
         session["user_id"] = get_random(users.user_id)
         session["conversion_percentage"] = "unknown"
-
 
     product_ids = get_random_products(products.product_id)
 
